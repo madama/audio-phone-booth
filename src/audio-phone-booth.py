@@ -24,6 +24,7 @@ print("Waiting for keys...")
 track = ""
 
 def printKey(key):
+    global track
     print(key)
     if key=="#":
         print("Playing {}.mp3".format(track))
