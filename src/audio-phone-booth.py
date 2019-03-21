@@ -28,7 +28,7 @@ def printKey(key):
     print(key)
     if key=="#":
         print("Playing {}.mp3".format(track))
-        mixer.music.load("~/audio/" + track + ".mp3")
+        mixer.music.load("/home/pi/audio/" + track + ".mp3")
         mixer.music.play()
         track = ""
     elif key=="*":
