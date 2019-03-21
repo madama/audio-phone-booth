@@ -3,4 +3,4 @@ import time
 
 GPIO.setmode(GPIO.BCM)
 
-print "Init done!"
+print("Init done!")
