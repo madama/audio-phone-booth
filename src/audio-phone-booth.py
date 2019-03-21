@@ -25,9 +25,9 @@ track = ""
 
 def printKey(key):
     print(key)
-    if (key=="#")
+    if key=="#":
         print("Playing {}.mp3".format(track))
-    elif (key=="*")
+    elif key=="*":
         print("Reset")
         track = ""
     else:
