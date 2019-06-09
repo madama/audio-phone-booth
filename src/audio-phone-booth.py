@@ -1,6 +1,12 @@
+
 from pad4pi import rpi_gpio
 from pygame import mixer
-import time
+from pathlib import Path
+import os, random, time
+
+AUDIO_PATH = "/home/pi/audio/Audio"
+AUDIO_NOT_FOUND_PATH = "/home/pi/audio/NOT_FOUND/"
+AUDIO_EXTENSION = ".mp3"
 
 KEYPAD = [
     ["F1", "", "F2", "F3", ""],
@@ -23,16 +29,27 @@ print("Waiting for keys...")
 
 track = ""
 
+def playAudio(audioFile):
+    if mixer.muxis.get_busy:
+        mixer.music.stop
+    print("Playing {}".format(audioFile))
+    if not Path(audioFile).is_file:
+        files = os.listdir(AUDIO_NOT_FOUND_PATH)
+        notFoundTrack = random.randrange(0, len(files))
+        playAudio(notFoundTrack)
+    mixer.music.load(audioFile)
+    mixer.music.play()
+
+
 def printKey(key):
     global track
     print(key)
     if key=="#":
-        print("Playing {}.mp3".format(track))
-        mixer.music.load("/home/pi/audio/" + track + ".mp3")
-        mixer.music.play()
+        playAudio(AUDIO_PATH+track+AUDIO_EXTENSION)
         track = ""
     elif key=="*":
         print("Reset")
+        mixer.music.stop
         track = ""
     else:
         track += key
